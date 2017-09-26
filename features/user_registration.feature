@@ -12,6 +12,6 @@ Feature: As a user in order to use the application
       And I fill in "Name" with "unicorn"
       And I fill in "Email" with "unicorn@test.com"
       And I fill in "Password" with "password"
-      And I fill in "Password confirmation" with "password"
+      And I fill in "Password Confirmation" with "password"
       And I click on "Create"
-      And I should see "Welcome! You have signed up successfully"
+      And I should see the text "Welcome! You have signed up successfully"
