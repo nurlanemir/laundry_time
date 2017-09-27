@@ -1,6 +1,6 @@
 Given(/^the following users exists$/) do |table|
-  table.hashes.each do |hash|
-      User.create!(hash)
+  table.hashes.each do |table|
+    User.create!(table)
   end
 end
 

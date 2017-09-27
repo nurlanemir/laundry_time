@@ -5,4 +5,7 @@
   Having problems with the site? Email our system admin at unicorn_boss@rainbows.now</p>
 
 <a href="users/sign_up">Sign Up</a>
-<div class="alert alert-success"></div>
+
+<% flash.each do |message_type, message| %>
+    <%= content_tag(:div, message,  class: "alert alert-#{message_type}", role: "alert") %>
+<% end %>
