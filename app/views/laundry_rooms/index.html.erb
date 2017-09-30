@@ -5,40 +5,66 @@
   smell of fresh rainbows.
   Having problems with the site? Email our system admin at unicorn_boss@rainbows.now</p>
 
-<%= link_to 'Book', '/laundry_rooms' %>
-<%= link_to 'Sign in', '/users/sign_in' %>
-<%= link_to 'Sign Up', new_user_registration_path %>
-<%= link_to 'Calendar', calendar_index_path %>
-<% flash.each do |message_type, message| %>
-    <%= content_tag(:div, message) %>
+<% if current_user %>
+    <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
+<% else %>
+    <%= link_to 'Sign Up', new_user_registration_path %>
+    <%= link_to 'Sign in', '/users/sign_in' %>
 <% end %>
 
-<h1>Book a LaundryTime</h1>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Slots</th>
-    <th>Actions</th>
-  </tr>
-  <% @laundry_rooms.each do |room| %>
+<% if current_user %>
+    <h1>Your bookings:</h1>
+    <% if current_user.bookings.any? %>
+        <% current_user.bookings.each do |booking| %>
+            <ul>
+              <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
+            </ul>
+        <% end %>
+    <% else %>
+        <p>You don't have any bookings yet.</p>
+    <% end %>
+
+    <h1>Book a LaundryTime</h1>
+    <table>
       <tr>
-        <td>
-          <%= room.id %>
-        </td>
-        <td>
-          <table>
-            <% room.schedule.next_occurrences(4).each do |slot| %>
-                <tr data-date="<%= slot.beginning_of_hour.to_formatted_s(:short) %>">
-                  <td>
-                    <%= slot.beginning_of_hour.to_formatted_s(:short) %>
-                  </td>
-                  <td>
-                    <%= link_to 'Book', laundry_room_create_booking_path(room, time: slot.beginning_of_hour.to_formatted_s(:short)) %>
-                  </td>
-                </tr>
-            <% end %>
-          </table>
-        </td>
+        <th>ID</th>
+        <th>Slots</th>
+        <th>Actions</th>
       </tr>
-  <% end %>
-</table>
+      <% @laundry_rooms.each do |room| %>
+          <tr>
+            <td>
+              <%= room.id %>
+            </td>
+            <td>
+              <table>
+                <% room.schedule.next_occurrences(4).each do |slot| %>
+                    <tr data-date="<%= slot.beginning_of_hour.to_formatted_s(:short) %>">
+                      <td>
+                        <%# binding.pry %>
+                        <%= slot.beginning_of_hour.to_formatted_s(:short) %>
+                      </td>
+                      <td>
+                        <%= link_to 'Book', laundry_room_create_booking_path(room, time: slot.beginning_of_hour.to_formatted_s(:short)) %>
+                      </td>
+                    </tr>
+                <% end %>
+              </table>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+
+
+<% @laundry_rooms.each do |room| %>
+    <%= month_calendar events: room.schedule.next_occurrences(30) do |date, slots| %>
+        <%= date.day %>
+
+        <% slots.each do |slot| %>
+            <div>
+              <%= link_to slot.strftime('%H:%M'), laundry_room_create_booking_path(room, time: slot.beginning_of_hour.to_formatted_s(:short)) %>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>
