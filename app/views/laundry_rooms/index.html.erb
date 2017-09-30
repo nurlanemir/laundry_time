@@ -58,15 +58,13 @@
 
 
 <% @laundry_rooms.each do |room| %>
-  <% room.schedule.next_occurrences(4).each do |slot| %>
-    <%= month_calendar events: room.schedule.next_occurrences(30) do |date, slots| %>
-      <%= date.day %>
+  <%= month_calendar events: room.schedule.next_occurrences(30) do |date, slots| %>
+    <%= date.day %>
 
-      <% slots.each do |slot| %>
-        <div>
-          <%= link_to slot.strftime('%H:%M'), laundry_room_create_booking_path(room, time: slot.beginning_of_hour.to_formatted_s(:short)) %>
-        </div>
-      <% end %>
+    <% slots.each do |slot| %>
+      <div>
+        <%= link_to slot.strftime('%H:%M'), laundry_room_create_booking_path(room, time: slot.beginning_of_hour.to_formatted_s(:short)) %>
+      </div>
     <% end %>
   <% end %>
 <% end %>
