@@ -15,8 +15,8 @@ Given(/^there is a laundry room$/) do
 end
 
 
-Given(/^I click on "([^"]*)" for first "([^"]*)"$/) do |element, data|
-  scope = find("tr[data-date='#{data}']")
+Given(/^I click on "([^"]*)" for first "([^"]*)"$/) do |element|
+  scope = find_link(class: ['booking-button'], :visible => :all).visible?
   within scope do
     click_link_or_button element
   end

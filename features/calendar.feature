@@ -1,4 +1,4 @@
-Feature: User can go to landing page
+Feature: User can see the calendar
   As a user
   In order to book laundry time
   I would like to see a calendar
@@ -11,4 +11,3 @@ Feature: User can go to landing page
   Scenario: User can navigate to calendar page
     Given I navigate to the index page
     Then I should see a calender
-    Then show me the page

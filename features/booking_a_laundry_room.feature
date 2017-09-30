@@ -5,14 +5,14 @@ Feature: user should be able to book time in laundry room
   I would like to be able to book a laundry time
 
   Background:
-    Given time is frozen at 2017-09-01
+    Given time is frozen at 2017-09-30
     And there is a laundry room
     And there is a user logged in
 
   Scenario: User can book a laundry time
     Given user visits the booking page
-    And I click on "Book" for first "01 Sep 08:00"
-    Then I should see the text "You have a booking 01 Sep 08:00. Great stuff"
+    And I click on "13:00"
+    Then I should see the text "You have a booking 30 Sep 13:00. Great stuff"
 
   Scenario: User tries to book a booked slot
     Given laundry is booked at "01 Sep 08:00"
