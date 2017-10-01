@@ -6,10 +6,7 @@ We created an app which allows users to sign up and book a laundry room. You cre
 In the calendar you will see the next 30 time slots. Available times will be shown as green links, unavailable times will be shown as red text.
 
 When you press "Book" you will see a success-flash, and your booked time will show up in a list for you bookings, sorted by date. Only active bookings will be listed.
-You can only have two active bookings at a time. 
-
-WIPs:
-* User can unbook slot
+You can only have two active bookings at a time. User can unbook their slots.
 
 ## Getting Started
 
