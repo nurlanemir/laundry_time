@@ -1,35 +1,4 @@
 <% if current_user %>
-<<<<<<< HEAD
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <h3>Your bookings:</h3>
-          <% if current_user.bookings.any? %>
-              <% current_user.bookings.each do |booking| %>
-                  <ul>
-                    <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
-                  </ul>
-              <% end %>
-          <% else %>
-              <p>You don't have any bookings yet.</p>
-          <% end %>
-          </div>
-        <div class="col">
-          <h3>You may:</h3>
-          <ul>
-            <li>only book two weeks in advance</li>
-            <li>only have two time slots booked</li>
-            <li>not smoke in the laundry room</li>
-            <li>not leave the laundry room dirty</li>
-          </ul>
-        </div>
-        <div class="col">
-          <%= image_tag('unicorn.png', align: 'middle', height: 170, class: 'image') %>
-        </div>
-        </div>
-    </div>
-    
-=======
   <h1>Your bookings:</h1>
     <% if current_user.bookings.any? %>
     <% current_user.bookings.each do |booking| %>
@@ -42,7 +11,6 @@
     <p>You don't have any bookings yet.</p>
   <% end %>
 
->>>>>>> b96a25815cfc955b374fcb5ba0b6b88d9fec33e3
   <% @laundry_rooms.each do |room| %>
     <%= month_calendar events: room.schedule.next_occurrences(30) do |date, slots| %>
       <%= date.day %>
