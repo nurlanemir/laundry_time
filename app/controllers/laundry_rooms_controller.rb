@@ -9,7 +9,7 @@ class LaundryRoomsController < ApplicationController
     room = LaundryRoom.find(params[:laundry_room_id])
     slot = Time.zone.parse(params[:time])
     slot_to_book = room.schedule
-                       .occurrences(1.week.from_now)
+                       .occurrences(3.week.from_now)
                        .detect { |occ| occ.beginning_of_hour.localtime == slot.localtime }
     active_bookings = current_user.bookings.find_all{ |booking| booking[:time] > (DateTime.now - 5.hours) }
     if active_bookings.length < 2
@@ -29,7 +29,7 @@ class LaundryRoomsController < ApplicationController
   def delete_booking
     active_bookings = current_user.bookings.detect { |booking| booking.time == params[:time] }
     active_bookings.delete
+    flash[:notice] = 'You have successfully cancelled your booking.'
     redirect_to root_path
-    flash[:notice] = 'You have successfully canceled your booking.'
   end
 end
