@@ -7,7 +7,6 @@
               <% current_user.bookings.each do |booking| %>
                   <ul>
                     <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
-                    <% # binding.pry %>
                     <%= link_to 'Unbook', laundry_room_delete_booking_path(laundry_room_id: @laundry_rooms.ids, time: booking[:time]) %>
                   </ul>
               <% end %>

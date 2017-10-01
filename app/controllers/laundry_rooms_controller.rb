@@ -28,7 +28,7 @@ class LaundryRoomsController < ApplicationController
 
   def delete_booking
     active_bookings = current_user.bookings.detect { |booking| booking.time == params[:time] }
-    binding.pry
+    active_bookings.delete
     redirect_to root_path
     flash[:notice] = 'You have successfully canceled your booking.'
   end
