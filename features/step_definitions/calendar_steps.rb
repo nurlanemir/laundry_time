@@ -6,3 +6,11 @@ end
 Then(/^I should see a calender$/) do
   expect(page).to have_css '.simple-calendar'
 end
+
+Then(/^I should( not)? see a calendar link "([^"]*)" at ([^"]*)$/) do |negate, time, date|
+  if negate
+    
+  else
+
+  end
+end
