@@ -1,15 +1,34 @@
 <% if current_user %>
-  <h1>Your bookings:</h1>
-    <% if current_user.bookings.any? %>
-    <% current_user.bookings.each do |booking| %>
-      <ul>
-        <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
-        <%= link_to 'Unbook', laundry_room_delete_booking_path(laundry_room_id: 0) %>
-      </ul>
-    <% end %>
-  <% else %>
-    <p>You don't have any bookings yet.</p>
-  <% end %>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h3>Your bookings:</h3>
+          <% if current_user.bookings.any? %>
+              <% current_user.bookings.each do |booking| %>
+                  <ul>
+                    <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
+                    <% # binding.pry %>
+                    <%= link_to 'Unbook', laundry_room_delete_booking_path(laundry_room_id: @laundry_rooms.ids, time: booking[:time]) %>
+                  </ul>
+              <% end %>
+          <% else %>
+              <p>You don't have any bookings yet.</p>
+          <% end %>
+          </div>
+        <div class="col">
+          <h3>You may:</h3>
+          <ul>
+            <li>only book two weeks in advance</li>
+            <li>only have two time slots booked</li>
+            <li>not smoke in the laundry room</li>
+            <li>not leave the laundry room dirty</li>
+          </ul>
+        </div>
+        <div class="col">
+          <%= image_tag('unicorn.png', align: 'middle', height: 170, class: 'image') %>
+        </div>
+        </div>
+    </div>
 
   <% @laundry_rooms.each do |room| %>
     <%= month_calendar events: room.schedule.next_occurrences(30) do |date, slots| %>
