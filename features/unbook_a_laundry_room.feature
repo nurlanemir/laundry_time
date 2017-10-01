@@ -1,7 +1,7 @@
 @time
 Feature: Unbook a laundry room
   As a user
-  Incase I am to busy coding
+  Incase I am too busy coding
   I would like to be able to cancel my laundry room
 
   Background:

@@ -21,8 +21,8 @@ class LaundryRoomsController < ApplicationController
   end
 
   def delete_booking
+    active_bookings = current_user.bookings.detect { |booking| booking.time == params[:time] }
     binding.pry
-    active_bookings = current_user.bookings.find_all{ |booking| booking[:time] > (DateTime.now - 5.hours) }
     redirect_to root_path
   end
 end
