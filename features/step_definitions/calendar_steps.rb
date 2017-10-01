@@ -8,9 +8,10 @@ Then(/^I should see a calender$/) do
 end
 
 Then(/^I should( not)? see a calendar link "([^"]*)" at ([^"]*)$/) do |negate, time, date|
+  section = find('.today')
   if negate
-    
+    expect(section.has_css? 'a', text: time).to eq false
   else
-
+    expect(section.has_css? 'a', text: time).to eq true
   end
 end

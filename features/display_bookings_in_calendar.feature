@@ -12,6 +12,5 @@ Feature: User can go to landing page
   Scenario: User can navigate to calendar page
     Given I navigate to the index page
     Then I should see a calender
-    Then show me the page
-    Then I should not see a calendar link "08:00" at 2017-09-01
+    And I should not see a calendar link "08:00" at 2017-09-01
     But I should see a calendar link "13:00" at 2017-09-01
