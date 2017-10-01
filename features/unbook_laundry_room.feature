@@ -13,3 +13,5 @@ Feature: user should be able to unbook time in laundry room
     And I click on calendar link "01 Sep 08:00"
     And I click on "Unbook"
     Then I should see the text "You have successfully canceled your booking."
+    Then I click on calendar link "01 Sep 08:00"
+    And I should see the text "You have a booking 01 Sep 08:00. Smell the rainbows!"
