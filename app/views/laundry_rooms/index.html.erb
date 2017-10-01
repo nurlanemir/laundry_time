@@ -4,12 +4,11 @@
         <div class="col">
           <h3>Your bookings:</h3>
           <% if current_user.bookings.any? %>
-            <% current_user.bookings.sort_by{ |booking| booking.time }.each do |booking| %>
-              <% if booking[:time] > (DateTime.now - 5.hours) %>
-                <ul>
-                  <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
-                  <%= link_to 'Unbook', laundry_room_delete_booking_path(laundry_room_id: @laundry_rooms.ids, time: booking[:time]) %>
-                </ul>
+              <% current_user.bookings.each do |booking| %>
+                  <ul>
+                    <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
+                    <%= link_to 'Unbook', laundry_room_delete_booking_path(laundry_room_id: @laundry_rooms.ids, time: booking[:time]) %>
+                  </ul>
               <% end %>
             <% end %>
           <% else %>
