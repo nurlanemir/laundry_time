@@ -23,5 +23,6 @@ class LaundryRoomsController < ApplicationController
   def delete_booking
     active_bookings = current_user.bookings.find_all{ |booking| booking[:time] > (DateTime.now - 5.hours) }
     redirect_to root_path
+    flash[:notice] = 'You have successfully canceled your booking.'
   end
 end

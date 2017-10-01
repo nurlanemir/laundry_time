@@ -36,3 +36,7 @@ When(/^I try to access booking link for "([^"]*)"$/) do |date|
   date = Time.parse(date).to_formatted_s(:short)
   visit laundry_room_create_booking_path(@laundry, time: date)
 end
+
+And(/^I click on link "([^"]*)"$/) do |element|
+  find_link('Unbook').click
+end
