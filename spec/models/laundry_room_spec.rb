@@ -15,6 +15,10 @@ RSpec.describe LaundryRoom, type: :model do
     expect(subject.schedule).to_not eq nil
   end
 
+  it 'has a #start_time' do
+    expect(subject.start_time).to_not eq nil
+  end
+
   it 'schedule is of IceCube class  ' do
     expect(subject.schedule.class).to eq IceCube::Schedule
   end
