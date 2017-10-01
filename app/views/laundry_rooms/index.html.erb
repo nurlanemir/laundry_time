@@ -1,4 +1,5 @@
 <% if current_user %>
+<<<<<<< HEAD
     <div class="container">
       <div class="row">
         <div class="col">
@@ -28,6 +29,20 @@
         </div>
     </div>
     
+=======
+  <h1>Your bookings:</h1>
+    <% if current_user.bookings.any? %>
+    <% current_user.bookings.each do |booking| %>
+      <ul>
+        <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
+        <%= link_to 'Unbook', laundry_room_delete_booking_path(laundry_room_id: 0) %>
+      </ul>
+    <% end %>
+  <% else %>
+    <p>You don't have any bookings yet.</p>
+  <% end %>
+
+>>>>>>> b96a25815cfc955b374fcb5ba0b6b88d9fec33e3
   <% @laundry_rooms.each do |room| %>
     <%= month_calendar events: room.schedule.next_occurrences(30) do |date, slots| %>
       <%= date.day %>

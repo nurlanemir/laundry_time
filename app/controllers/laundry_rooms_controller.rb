@@ -19,4 +19,9 @@ class LaundryRoomsController < ApplicationController
       redirect_to root_path, notice: error.message.underscore.humanize
     end
   end
+
+  def delete_booking
+    active_bookings = current_user.bookings.find_all{ |booking| booking[:time] > (DateTime.now - 5.hours) }
+    redirect_to root_path
+  end
 end
