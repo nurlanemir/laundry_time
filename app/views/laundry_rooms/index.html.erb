@@ -11,6 +11,7 @@
     <% current_user.bookings.each do |booking| %>
       <ul>
         <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
+        <%= link_to 'Unbook', laundry_room_delete_booking_path(laundry_room_id: 0) %>
       </ul>
     <% end %>
   <% else %>
@@ -20,7 +21,6 @@
   <% @laundry_rooms.each do |room| %>
     <%= month_calendar events: room.schedule.next_occurrences(30) do |date, slots| %>
       <%= date.day %>
-
       <% slots.each do |slot| %>
         <div data-date="<%= slot.to_formatted_s(:short) %>">
           <% if room.check_availability time: slot, amount: 1 %>
