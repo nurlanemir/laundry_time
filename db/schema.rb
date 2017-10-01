@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20170928131117) do
     t.integer  "capacity",   default: 1
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :bigserial, force: :cascade do |t|
     t.string   "name"
     t.integer  "apartment_nr"
     t.string   "password"
