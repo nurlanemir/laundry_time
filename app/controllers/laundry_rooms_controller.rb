@@ -2,7 +2,7 @@ class LaundryRoomsController < ApplicationController
   before_action :authenticate_user!, only: [:create_booking]
 
   def index
-    @laundry_rooms = LaundryRoom.all
+    @laundry_rooms = LaundryRoom.all  #TODO Support for multiple laundry rooms
   end
 
   def create_booking
@@ -11,8 +11,8 @@ class LaundryRoomsController < ApplicationController
     slot_to_book = room.schedule
                        .occurrences(3.week.from_now)
                        .detect { |occ| occ.beginning_of_hour.localtime == slot.localtime }
-    active_bookings = current_user.bookings.find_all{ |booking| booking[:time] > (DateTime.now - 5.hours) }
-    if active_bookings.length < 2
+    active_booking = current_user.bookings.find_all{ |booking| booking[:time] > (DateTime.now - 5.hours) }
+    if active_booking.length < 2
       begin
         current_user.book! room, time: slot_to_book, amount: 1
         redirect_to root_path
