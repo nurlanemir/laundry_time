@@ -8,7 +8,7 @@
               <% if booking[:time] > (DateTime.now - 5.hours) %>
                 <ul>
                   <li><%= booking[:time].beginning_of_hour.to_formatted_s(:short) %></li>
-                  <%= link_to 'Unbook', laundry_room_delete_booking_path(laundry_room_id: booking.bookable, time: booking.time.to_formatted_s) %>
+                  <%= link_to 'Unbook', laundry_room_delete_booking_path(laundry_room_id: booking.bookable, time: booking.time.to_formatted_s(:short)) %>
                 </ul>
               <% end %>
             <% end %>
